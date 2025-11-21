@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   wordpress:
     image: wordpress:php8.2-apache
@@ -13,6 +11,8 @@ services:
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASS}
       WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_SITEURL: http://localhost:${WP_PORT}
+      WORDPRESS_HOME: http://localhost:${WP_PORT}
     volumes:
       - ./wp:/var/www/html
       - ./php-config/php.ini:/usr/local/etc/php/conf.d/custom.ini
@@ -27,7 +27,7 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
     volumes:
-      - ${DB_VOLUME}:/var/lib/mysql
+      - db_data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
 
@@ -43,6 +43,5 @@ services:
       PMA_USER: root
       PMA_PASSWORD: ${DB_ROOT_PASS}
     restart: unless-stopped
-
 volumes:
-  ${DB_VOLUME}:
+  db_data:
