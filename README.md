@@ -23,3 +23,12 @@ To use this repository, follow the following steps:
    > NOTE: If you bring the container up again your data should still be intact.
 8. To destroy the container, use the following command: `docker-compose down -v`
    > NOTE: If you destroy a container this way the data is not recoverable.
+
+## Restoring from Duplicator Backup
+
+1. Get your `installer.php` and `archive.zip` file from the original site you're trying to restore from.
+2. Place these files in the `wp` directory.
+3. Visit `http://localhost:8000/installer.php` in your browser.
+4. Change the database server from `localhost` to `db_yourprojectname` (this will be the name of the docker volume hosting the database)
+5. Change the username and password to `wpuser` and `wppass`
+6. Continue through the steps, then login with the username/password from the original site.
